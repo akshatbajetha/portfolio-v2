@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const garamond = EB_Garamond({ weight: "400", subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
