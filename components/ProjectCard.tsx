@@ -37,13 +37,15 @@ export function ProjectCard({
           {description}
         </CardItem>
         <CardItem translateZ="100" className="w-full mt-4">
-          <Image
-            src={img}
-            height="1000"
-            width="1000"
-            className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt={title}
-          />
+          <Link href={url} target="_blank">
+            <Image
+              src={img}
+              height="1000"
+              width="1000"
+              className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+              alt={title}
+            />
+          </Link>
         </CardItem>
         <div className="flex justify-start items-center m-5">
           <CardItem

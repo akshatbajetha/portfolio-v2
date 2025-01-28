@@ -1,20 +1,12 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { EB_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import Footer from "@/components/Footer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const garamond = EB_Garamond({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Akshat Bajetha",
@@ -28,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${garamond.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -40,6 +30,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

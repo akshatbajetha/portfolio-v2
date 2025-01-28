@@ -7,7 +7,6 @@ import Technologies from "@/components/Technologies";
 export default function Home() {
   return (
     <div className="px-[20vw] py-5">
-      {/* <Navbar /> */}
       <About />
       <Technologies />
       <Projects />
@@ -16,6 +15,5 @@ export default function Home() {
   );
 }
 
-// TODO: Change font to something nice
 // TODO: Responsive
 // TODO: More navlink options if possible
