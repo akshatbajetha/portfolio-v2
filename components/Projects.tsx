@@ -5,6 +5,7 @@ import Chatzy from "@/public/ProjectLogos/chatzy.png";
 import BlogNation from "@/public/ProjectLogos/blognation.png";
 import Taskly from "@/public/ProjectLogos/taskly.png";
 import GrooveBeats from "@/public/ProjectLogos/groovebeats.png";
+import { BlurFade } from "./ui/blur-fade";
 
 function Projects() {
   const featuredProjects = [
@@ -34,15 +35,16 @@ function Projects() {
   ];
 
   return (
-    <div className="mt-5">
-      <h1 className="text-3xl">Featured Projects</h1>
-      <div className="grid grid-cols-2">
-        {featuredProjects.map((project) => (
-          <ProjectCard key={project.title} {...project} />
-        ))}
+    <BlurFade delay={0.03} inView>
+      <div className="mt-5">
+        <h1 className="text-3xl">Featured Projects</h1>
+        <div className="grid grid-cols-2">
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
+          ))}
+        </div>
       </div>
-      {/* <TempCard /> */}
-    </div>
+    </BlurFade>
   );
 }
 export default Projects;

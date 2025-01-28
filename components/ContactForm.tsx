@@ -1,62 +1,88 @@
 "use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { sendEmail } from "@/lib/actions";
 
 export default function ContactForm() {
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+  const [status, setStatus] = useState<{
+    message: string;
+    success: boolean;
+  } | null>(null);
+  const [isPending, setIsPending] = useState(false);
 
-    formData.append("access_key", "d892c095-0556-46e5-8bf2-e42f2ca8fc27");
+  async function handleSubmit(formData: FormData) {
+    setIsPending(true);
+    const result = await sendEmail(formData);
+    setStatus(result);
+    setIsPending(false);
 
-    const object = Object.fromEntries(formData);
-    console.log(object);
-
-    const json = JSON.stringify(object);
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: json,
-    });
-    const result = await response.json();
     if (result.success) {
-      console.log(result);
+      // Reset the form
+      const form = document.querySelector("form") as HTMLFormElement;
+      form.reset();
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <Input
-        type="text"
-        name="name"
-        placeholder="Full Name"
-        className="bg-zinc-900 border-zinc-800 placeholder:text-zinc-400"
-      />
-
-      <Input
-        type="email"
-        name="email"
-        placeholder="Email"
-        className="bg-zinc-900 border-zinc-800 placeholder:text-zinc-400"
-      />
-      <Textarea
-        placeholder="Message"
-        name="message"
-        className="bg-zinc-900 border-zinc-800 placeholder:text-zinc-400 min-h-[160px]"
-      />
-      <Button
-        type="submit"
-        className="w-full bg-zinc-800 hover:bg-zinc-700 text-white"
-      >
-        Submit
-      </Button>
-    </form>
+    <div className="h-max flex items-center justify-center p-4">
+      <Card className="w-full max-w-md">
+        <CardContent className="p-4">
+          <form action={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Enter your message"
+                className="min-h-[120px]"
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? "Sending..." : "Send Message"}
+            </Button>
+            {status && (
+              <div
+                className={`text-center mt-4 ${
+                  status.success ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {status.message}
+              </div>
+            )}
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
-
-// TODO: Fix Error

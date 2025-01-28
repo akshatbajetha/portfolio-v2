@@ -5,6 +5,7 @@ import BlogNation from "@/public/ProjectLogos/blognation.png";
 import Taskly from "@/public/ProjectLogos/taskly.png";
 import GrooveBeats from "@/public/ProjectLogos/groovebeats.png";
 import { ProjectCard } from "@/components/ProjectCard";
+import { BlurFade } from "@/components/ui/blur-fade";
 
 function Projects() {
   const allProjects = [
@@ -57,14 +58,16 @@ function Projects() {
     },
   ];
   return (
-    <div className="px-[20vw] py-5 h-max">
-      <h1 className="text-3xl p-5">All Projects</h1>
-      <div className="grid grid-cols-2 gap-4">
-        {allProjects.map((project) => (
-          <ProjectCard key={project.title} {...project} />
-        ))}
+    <BlurFade delay={0.03} inView>
+      <div className="px-[20vw] py-5 h-max">
+        <h1 className="text-3xl p-5">All Projects</h1>
+        <div className="grid grid-cols-2 gap-4">
+          {allProjects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
+          ))}
+        </div>
       </div>
-    </div>
+    </BlurFade>
   );
 }
 export default Projects;

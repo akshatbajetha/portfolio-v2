@@ -15,3 +15,7 @@ export default function Home() {
     </div>
   );
 }
+
+// TODO: Change font to something nice
+// TODO: Responsive
+// TODO: More navlink options if possible
