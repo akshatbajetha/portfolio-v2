@@ -26,6 +26,7 @@ export async function sendEmail(formData: FormData) {
     return {
       success: false,
       message: "Failed to send email. Please try again.",
+      error,
     };
   }
 }

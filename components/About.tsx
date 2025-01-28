@@ -25,10 +25,10 @@ function About() {
             </p>
             <p className="text-lg">
               Currently I am exploring new technologies while building products
-              that'll help people.
+              that&apos;ll help people.
             </p>
             <p className="text-lg">
-              I'm open to work, freelance, or collaborate!
+              I&apos;m open to work, freelance, or collaborate!
             </p>
           </div>
 
