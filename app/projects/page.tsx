@@ -59,12 +59,12 @@ function Projects() {
   ];
   return (
     <BlurFade delay={0.03} inView>
-      <div className="px-[20vw] py-5 h-max">
+      <div className="md:px-[20vw] py-5 h-max">
         <h1 className="text-3xl relative inline-block group">
           All Projects
           <span className="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-500 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100 "></span>
         </h1>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="md:grid md:grid-cols-2 flex flex-col md:gap-4">
           {allProjects.map((project) => (
             <ProjectCard key={project.title} {...project} />
           ))}

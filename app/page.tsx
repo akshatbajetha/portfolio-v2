@@ -5,7 +5,7 @@ import Technologies from "@/components/Technologies";
 
 export default function Home() {
   return (
-    <div className="px-[20vw] py-5">
+    <div className="md:px-[20vw] overflow-x-hidden md:overflow-x-auto px-3 py-5">
       <About />
       <Technologies />
       <Projects />
@@ -13,6 +13,3 @@ export default function Home() {
     </div>
   );
 }
-
-// TODO: Responsive
-// TODO: More navlink options if possible

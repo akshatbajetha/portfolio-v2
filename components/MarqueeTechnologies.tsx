@@ -92,7 +92,7 @@ const TechnologiesCard = ({
   return (
     <figure
       className={cn(
-        "relative w-max cursor-pointer overflow-hidden rounded-xl border px-4 py-2",
+        "relative md:w-max cursor-pointer overflow-hidden rounded-xl border px-4 py-2",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
@@ -113,7 +113,7 @@ const TechnologiesCard = ({
 
 export function MarqueeTechnologies() {
   return (
-    <div className="relative flex h-max w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background mt-4">
+    <div className="relative flex h-max md:w-full w-[20rem] flex-col items-center justify-center overflow-hidden rounded-lg bg-background mt-4">
       <Marquee pauseOnHover className="[--duration:30s]">
         {row1.map((review) => (
           <TechnologiesCard key={review.name} {...review} />

@@ -8,7 +8,7 @@ import { BlurFade } from "./ui/blur-fade";
 export default function Contact() {
   return (
     <BlurFade delay={0.03} inView>
-      <div className="h-max  dark:text-white pt-5">
+      <div className="h-max  dark:text-white pt-5 px-3 md:px-0">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
           <div>
             <h1 className="text-3xl font-bold mb-2">Get in Touch</h1>
@@ -31,7 +31,7 @@ export default function Contact() {
                 <a
                   href="https://github.com/akshatbajetha"
                   target="_blank"
-                  className="dark:bg-zinc-900 p-3 rounded-lg hover:bg-gray-600 transition-colors"
+                  className="dark:bg-zinc-900 p-3 rounded-lg hover:bg-gray-600 dark:hover:bg-gray-600 transition-colors"
                   aria-label="GitHub"
                 >
                   <FaGithub className="w-6 h-6" />
@@ -39,7 +39,7 @@ export default function Contact() {
                 <a
                   href="https://www.linkedin.com/in/akshat-bajetha/"
                   target="_blank"
-                  className="dark:bg-zinc-900 p-3 rounded-lg hover:bg-blue-500 transition-colors"
+                  className="dark:bg-zinc-900 p-3 rounded-lg hover:bg-blue-500 dark:hover:bg-blue-500 transition-colors"
                   aria-label="LinkedIn"
                 >
                   <FaLinkedin className="w-6 h-6" />
@@ -56,7 +56,7 @@ export default function Contact() {
                 <a
                   href="https://buymeacoffee.com/akshatbajetha"
                   target="_blank"
-                  className="dark:bg-zinc-900 p-3 rounded-lg hover:bg-yellow-500 transition-colors"
+                  className="dark:bg-zinc-900 p-3 rounded-lg dark:hover:bg-yellow-500 hover:bg-yellow-500 transition-colors"
                   aria-label="Buy me a coffee"
                 >
                   <SiBuymeacoffee className="w-6 h-6" />

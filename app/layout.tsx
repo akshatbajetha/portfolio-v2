@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { EB_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -12,6 +12,13 @@ const garamond = EB_Garamond({ weight: "400", subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Akshat Bajetha",
   description: "Akshat Bajetha's portfolio website",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
