@@ -28,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${garamond.className} antialiased`}>
+      <body
+        className={`${garamond.className} overflow-x-hidden md:overflow-x-auto antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
