@@ -1,4 +1,4 @@
-import { X, Home, FolderKanban } from "lucide-react";
+import { X } from "lucide-react";
 import Link from "next/link";
 import { ToggleTheme } from "./ToggleTheme";
 
