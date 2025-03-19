@@ -1,7 +1,6 @@
 import { FaGithub } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
-import { SiBuymeacoffee } from "react-icons/si";
 import ContactForm from "./ContactForm";
 import { BlurFade } from "./ui/blur-fade";
 
@@ -26,7 +25,7 @@ export default function Contact() {
             </p>
 
             <div className="space-y-6">
-              <h2 className="text-xl font-semibold">Follow me</h2>
+              <h2 className="text-xl font-semibold">Social Links</h2>
               <div className="flex flex-wrap gap-4">
                 <a
                   href="https://github.com/akshatbajetha"
@@ -51,15 +50,6 @@ export default function Contact() {
                   aria-label="Twitter"
                 >
                   <FaXTwitter className="w-6 h-6" />
-                </a>
-
-                <a
-                  href="https://buymeacoffee.com/akshatbajetha"
-                  target="_blank"
-                  className="dark:bg-zinc-900 p-3 rounded-lg dark:hover:bg-yellow-500 hover:bg-yellow-500 transition-colors"
-                  aria-label="Buy me a coffee"
-                >
-                  <SiBuymeacoffee className="w-6 h-6" />
                 </a>
               </div>
             </div>
