@@ -7,6 +7,7 @@ import { FaBootstrap } from "react-icons/fa6";
 import { FaJava } from "react-icons/fa6";
 import { FaNodeJs } from "react-icons/fa6";
 import { BiLogoTypescript } from "react-icons/bi";
+import { BiLogoPostgresql } from "react-icons/bi";
 import { RiNextjsFill } from "react-icons/ri";
 import { SiPostman } from "react-icons/si";
 import { FaReact } from "react-icons/fa6";
@@ -24,6 +25,10 @@ const technologies = [
   {
     src: <SiMongodb />,
     name: "MongoDB",
+  },
+  {
+    src: <BiLogoPostgresql />,
+    name: "PostgreSQL",
   },
   {
     src: <IoLogoJavascript />,
