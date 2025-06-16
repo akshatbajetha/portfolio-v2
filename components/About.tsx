@@ -36,7 +36,7 @@ function About() {
             <h3 className="text-lg sm:text-2xl md:text-3xl font-bold tracking-tighter">
               Check out my{" "}
               <Link
-                href="https://drive.google.com/file/d/1Vq_bB1EsFLX7zqHdQVhlBmvV6pPkzIHO/view?usp=sharing"
+                href="https://drive.google.com/file/d/1JG5p9eYm-LXWCgi7eio1N8OuqxSUpEkZ/view?usp=sharing"
                 target="_blank"
                 className="text-cyan-500 relative inline-block group"
               >
