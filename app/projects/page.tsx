@@ -1,3 +1,6 @@
+"use client";
+
+import NoteKaro from "@/public/ProjectLogos/NoteKaro-Dark.png";
 import CompoGen from "@/public/ProjectLogos/compogen.png";
 import NextBuy from "@/public/ProjectLogos/nextbuy.png";
 import Chatzy from "@/public/ProjectLogos/chatzy.png";
@@ -9,6 +12,14 @@ import { BlurFade } from "@/components/ui/blur-fade";
 
 function Projects() {
   const allProjects = [
+    {
+      title: "NoteKaro",
+      description:
+        "An all-in-one workspace for notes, sketches, and todos with email reminders.",
+      url: "https://www.notekaro.com/",
+      github: "https://github.com/akshatbajetha/notekaro",
+      img: NoteKaro,
+    },
     {
       title: "CompoGen",
       description:

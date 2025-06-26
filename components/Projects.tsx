@@ -1,12 +1,22 @@
+"use client";
 import { ProjectCard } from "./ProjectCard";
 import CompoGen from "@/public/ProjectLogos/compogen.png";
 import NextBuy from "@/public/ProjectLogos/nextbuy.png";
 import Chatzy from "@/public/ProjectLogos/chatzy.png";
+import NoteKaro from "@/public/ProjectLogos/NoteKaro-Dark.png";
 import { BlurFade } from "./ui/blur-fade";
 import Link from "next/link";
 
 function Projects() {
   const featuredProjects = [
+    {
+      title: "NoteKaro",
+      description:
+        "An all-in-one workspace for notes, sketches, and todos with email reminders.",
+      url: "https://www.notekaro.com/",
+      github: "https://github.com/akshatbajetha/notekaro",
+      img: NoteKaro,
+    },
     {
       title: "CompoGen",
       description:
