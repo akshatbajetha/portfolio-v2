@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import myImage from "@/public/myPhoto.jpeg";
+import myImage from "@/public/myImage.png";
 import { BlurFade } from "./ui/blur-fade";
 import Link from "next/link";
 
