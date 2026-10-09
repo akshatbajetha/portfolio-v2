@@ -78,8 +78,13 @@ function ExperienceContent() {
 
 function ProjectsContent() {
   const { openWindow } = useWindows();
-  const featured = projects.filter((project) => project.featured);
-  const rest = projects.filter((project) => !project.featured);
+  const featured = projects.filter(
+    (project) => project.featured && !project.openSource
+  );
+  const rest = projects.filter(
+    (project) => !project.featured && !project.openSource
+  );
+  const openSource = projects.filter((project) => project.openSource);
 
   const renderList = (list: typeof projects) => (
     <ul className="mt-1">
@@ -102,8 +107,18 @@ function ProjectsContent() {
     <div className="text-sm">
       <p className="text-muted-foreground">Open a file</p>
       {renderList(featured)}
-      <p className="mt-4 text-muted-foreground">Other</p>
-      {renderList(rest)}
+      {rest.length > 0 ? (
+        <>
+          <p className="mt-4 text-muted-foreground">Other</p>
+          {renderList(rest)}
+        </>
+      ) : null}
+      {openSource.length > 0 ? (
+        <>
+          <p className="mt-4 text-muted-foreground">Open Source Contributions</p>
+          {renderList(openSource)}
+        </>
+      ) : null}
     </div>
   );
 }
@@ -143,14 +158,25 @@ function ProjectDetailContent({ slug }: { slug: string }) {
 
   return (
     <div className="space-y-4 text-sm leading-relaxed">
-      <p>{project.summary}</p>
-      <p className="text-muted-foreground">{project.stack}</p>
-      {(project.live || project.github) && (
+      {project.bullets ? (
+        <ul className="list-disc space-y-1 pl-5">
+          {project.bullets.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>{project.summary}</p>
+      )}
+      {project.stack ? (
+        <p className="text-muted-foreground">{project.stack}</p>
+      ) : null}
+      {(project.live || project.github || project.pr) && (
         <p className="flex gap-4 text-muted-foreground">
           {project.live && <ExternalLink href={project.live}>Live</ExternalLink>}
           {project.github && (
             <ExternalLink href={project.github}>GitHub</ExternalLink>
           )}
+          {project.pr && <ExternalLink href={project.pr}>PR Link</ExternalLink>}
         </p>
       )}
     </div>

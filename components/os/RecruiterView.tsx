@@ -37,8 +37,10 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 
 export function RecruiterView() {
   const resume = socialLinks.find((link) => link.label === "Resume");
-  const featured = projects.filter((project) => project.featured);
-  const openSource = projects.find((project) => project.slug === "calcom");
+  const featured = projects.filter(
+    (project) => project.featured && !project.openSource
+  );
+  const openSource = projects.filter((project) => project.openSource);
 
   return (
     <article className="mx-auto max-w-3xl pb-6 text-[13px] leading-snug">
@@ -118,14 +120,25 @@ export function RecruiterView() {
         ))}
       </Section>
 
-      {openSource ? (
-        <Section title="Open source">
-          <p className="font-semibold">{openSource.title}</p>
-          <ul className="mt-1 list-disc space-y-1 pl-5">
-            {(openSource.bullets ?? [openSource.summary]).map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
-          </ul>
+      {openSource.length > 0 ? (
+        <Section title="Open Source Contributions">
+          {openSource.map((project) => (
+            <div key={project.slug}>
+              <p className="font-semibold">
+                {project.title}
+                {project.pr ? (
+                  <span className="ml-2 font-normal">
+                    <Link href={project.pr}>PR Link</Link>
+                  </span>
+                ) : null}
+              </p>
+              <ul className="mt-1 list-disc space-y-1 pl-5">
+                {(project.bullets ?? [project.summary]).map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </Section>
       ) : null}
 

@@ -116,9 +116,11 @@ export function StartMenu({ onClose }: { onClose: () => void }) {
             <FileGlyph className="h-8 w-8 shrink-0" />
             <span className="min-w-0">
               <span className="block truncate">{project.title}</span>
-              <span className="block truncate text-xs text-muted-foreground">
-                {project.stack}
-              </span>
+              {project.stack ? (
+                <span className="block truncate text-xs text-muted-foreground">
+                  {project.stack}
+                </span>
+              ) : null}
             </span>
           </button>
         ))}

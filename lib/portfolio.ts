@@ -52,10 +52,12 @@ export type Project = {
   slug: string;
   title: string;
   summary: string;
-  stack: string;
+  stack?: string;
   live?: string;
   github?: string;
+  pr?: string;
   featured?: boolean;
+  openSource?: boolean;
   bullets?: string[];
 };
 
@@ -123,9 +125,11 @@ export const projects: Project[] = [
     slug: "calcom",
     title: "Cal.com",
     summary:
-      "Open-source scheduling platform. Debugged and resolved a recurring UI title-overflow issue across multiple components; contributed a merged pull request improving layout consistency.",
-    stack: "Open source contribution",
+      "Debugged and resolved a recurring UI title-overflow issue across multiple components; contributed a merged pull request improving layout consistency.",
+    pr: "https://github.com/calcom/cal.diy/pull/24693",
+    openSource: true,
     bullets: [
+      "Open-source scheduling platform",
       "Debugged and resolved a recurring UI title-overflow issue across multiple components; contributed a merged pull request improving layout consistency and code quality.",
     ],
   },

@@ -1,13 +1,23 @@
 "use client";
 
-import { useEffect, useRef, type PointerEvent } from "react";
+import { useEffect, useRef } from "react";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  type PanInfo,
+} from "framer-motion";
+import { ChevronUp } from "lucide-react";
 import { profile } from "@/lib/portfolio";
 import { Clock } from "./Clock";
 import { UserGlyph } from "./icons";
 import { ThemeToggle } from "./ThemeToggle";
+import { useIsDesktop } from "./use-media-query";
 
 export function LockScreen({ onUnlock }: { onUnlock: () => void }) {
-  const startY = useRef<number | null>(null);
+  const isDesktop = useIsDesktop();
+  const y = useMotionValue(0);
+  const unlocking = useRef(false);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
@@ -17,29 +27,46 @@ export function LockScreen({ onUnlock }: { onUnlock: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onUnlock]);
 
-  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
-    if ((event.target as HTMLElement).closest("button")) return;
-    startY.current = event.clientY;
+  const slideUnlock = () => {
+    if (unlocking.current) return;
+    unlocking.current = true;
+    const distance = typeof window !== "undefined" ? window.innerHeight : 900;
+    void animate(y, -distance, {
+      duration: 0.32,
+      ease: [0.22, 1, 0.36, 1],
+    }).then(() => onUnlock());
   };
 
-  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
-    if (startY.current == null) return;
-    const dy = startY.current - event.clientY;
-    startY.current = null;
-    if (dy > 72) onUnlock();
+  const onDragEnd = (
+    _: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    if (unlocking.current) return;
+    const lifted = -info.offset.y;
+    const flick = -info.velocity.y;
+    if (lifted > 88 || flick > 650) {
+      slideUnlock();
+      return;
+    }
+    void animate(y, 0, { type: "spring", stiffness: 420, damping: 36 });
   };
 
   return (
-    <div
-      className="os-root os-lock os-fade relative flex h-dvh flex-col items-center px-6 touch-pan-y"
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-      onPointerCancel={() => {
-        startY.current = null;
-      }}
+    <motion.div
+      className="os-root os-lock relative flex h-dvh flex-col items-center px-6 touch-none"
+      style={{ y }}
+      drag={isDesktop ? false : "y"}
+      dragConstraints={{ top: -2000, bottom: 0 }}
+      dragElastic={{ top: 0.08, bottom: 0.12 }}
+      dragMomentum={false}
+      dragDirectionLock
+      onDragEnd={onDragEnd}
     >
       <div className="absolute inset-0 bg-black/35" />
-      <div className="absolute right-3 top-3 z-10">
+      <div
+        className="absolute right-3 top-3 z-10 touch-auto"
+        onPointerDown={(event) => event.stopPropagation()}
+      >
         <ThemeToggle tooltip={false} />
       </div>
       <Clock
@@ -52,15 +79,23 @@ export function LockScreen({ onUnlock }: { onUnlock: () => void }) {
         <p className="text-sm text-white/80">{profile.role}</p>
         <button
           type="button"
-          autoFocus
+          autoFocus={isDesktop === true}
           onClick={onUnlock}
-          className="mt-6 rounded-md bg-white/18 px-8 py-2 text-sm text-white backdrop-blur-md hover:bg-white/28 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white md:inline-flex"
+          onPointerDown={(event) => event.stopPropagation()}
+          className="mt-6 hidden rounded-md bg-white/18 px-8 py-2 text-sm text-white backdrop-blur-md hover:bg-white/28 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white md:inline-flex"
         >
           Unlock
         </button>
-        <p className="mt-6 text-xs text-white/70 md:hidden">Swipe up to unlock</p>
-        <span className="mt-3 h-1.5 w-28 rounded-full bg-white/70 md:hidden" />
+        <motion.div
+          className="mt-8 flex flex-col items-center md:hidden"
+          animate={{ y: [0, -10, 0], opacity: [0.55, 1, 0.55] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronUp className="h-6 w-6" />
+          <ChevronUp className="-mt-3 h-6 w-6 opacity-50" />
+          <p className="mt-2 text-xs text-white/80">Swipe up to unlock</p>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
