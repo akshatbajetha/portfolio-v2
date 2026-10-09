@@ -2,8 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+@keyframes os-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes os-start {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.os-fade {
+  animation: os-fade 180ms ease-out;
+}
+
+.os-root {
+  --os-taskbar-h: 3rem;
+  --os-accent: 206 100% 42%;
+  --os-window: 0 0% 97%;
+  --os-window-border: 0 0% 83%;
+  --os-titlebar: 0 0% 95%;
+  --os-taskbar: 0 0% 95%;
+  --os-start: 0 0% 97%;
+  --os-close-hover: 0 73% 41%;
+  color: inherit;
+  background-color: #c5d7ee;
+  background-image: url("/wallpapers/bloom-light.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dark .os-root {
+  --os-accent: 201 100% 50%;
+  --os-window: 0 0% 18%;
+  --os-window-border: 0 0% 28%;
+  --os-titlebar: 0 0% 16%;
+  --os-taskbar: 0 0% 12%;
+  --os-start: 0 0% 14%;
+  --os-close-hover: 0 73% 41%;
+  background-color: #0b1020;
+  background-image: url("/wallpapers/bloom-dark.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.os-root.os-lock,
+.os-root.os-lock p,
+.os-root.os-lock button {
+  color: #fff;
+}
+
+.os-root.os-page {
+  overflow-y: auto;
+  background-image: none;
+  background-color: hsl(var(--background));
+}
+
+.os-window {
+  position: absolute;
+  inset: 0 0 var(--os-taskbar-h) 0;
+  overflow: hidden;
+  border-radius: 0;
+  border: 1px solid hsl(var(--os-window-border) / 0.8);
+  background: hsl(var(--os-window) / 0.88);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.28);
+  backdrop-filter: blur(40px) saturate(1.4);
+}
+
+@media (min-width: 768px) {
+  .os-window {
+    inset: auto;
+    left: var(--os-x);
+    top: var(--os-y);
+    width: var(--os-w);
+    height: var(--os-h);
+    border-radius: 10px;
+  }
+
+  .os-window[data-maximized="true"] {
+    inset: 0 0 var(--os-taskbar-h) 0;
+    left: 0;
+    top: 0;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+  }
+}
+
+.os-taskbar {
+  height: var(--os-taskbar-h);
+  background: hsl(var(--os-taskbar) / 0.72);
+  border-top: 1px solid hsl(var(--os-window-border) / 0.45);
+  backdrop-filter: blur(28px) saturate(1.5);
+}
+
+.os-start {
+  background: hsl(var(--os-start) / 0.82);
+  border: 1px solid hsl(var(--os-window-border) / 0.55);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 0.32);
+  backdrop-filter: blur(40px) saturate(1.5);
+}
+
+.os-caption-close:hover {
+  background: hsl(var(--os-close-hover));
+  color: white;
 }
 
 @layer utilities {
